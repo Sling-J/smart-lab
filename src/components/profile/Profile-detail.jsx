@@ -1,7 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
+import { Link } from 'react-router-dom';
 
-import {userDetailRequestAction} from '../../store/auth/action'
+import Spinner from '../spinner'
+import {userDetailRequestAction, logoutAction} from '../../store/auth/action'
 
 class ProfileDetail extends Component {
    componentDidMount() {
@@ -12,12 +14,10 @@ class ProfileDetail extends Component {
 
    render() {
       const userName = localStorage.getItem('userName');
-      const {userDetailData} = this.props;
-
-      return (
+      const {userDetailData, logoutAction, loading} = this.props;
+      
+      const Profile = () => (
          <Fragment>
-            <h1>{userName} Profile </h1>
-
             {userDetailData && (
                <div>
                   <p>Город - {userDetailData.city}</p>
@@ -41,6 +41,15 @@ class ProfileDetail extends Component {
             )}
          </Fragment>
       )
+   
+      return (
+         <Fragment>
+            <h1>{userName} Profile </h1>
+            {loading && <Spinner />}
+            <Profile />            
+            <Link onClick={logoutAction} to="/login">logout</Link>
+         </Fragment>
+      )
    }
 }
 
@@ -51,6 +60,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+   logoutAction,
    userDetailRequestAction
 };
 

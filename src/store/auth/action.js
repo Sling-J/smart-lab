@@ -3,7 +3,8 @@ import {
    LOGIN_SUCCESS,
    LOGIN_ERROR,
    USER_DETAIL_REQUEST,
-   USER_DETAIL_SUCCESS
+   USER_DETAIL_SUCCESS,
+   LOGOUT
 } from './constants';
 
 export const loginAction = dataOfForm => ({
@@ -32,4 +33,8 @@ export const userDetailRequestAction = (userId) => ({
 export const userDetailSuccessAction = userData => ({
    type: USER_DETAIL_SUCCESS,
    payload: userData
+});
+
+export const logoutAction = () => ({
+   type: LOGOUT
 });

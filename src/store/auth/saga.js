@@ -35,3 +35,7 @@ export function* userDetailSaga(action) {
       console.log(error);
    }
 }
+
+export function* logoutSaga() {
+   yield localStorage.clear();
+}

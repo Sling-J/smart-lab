@@ -6,12 +6,14 @@ import * as Yup from 'yup'
 import Spinner from '../spinner'
 
 const LoginForm = ({
-   values, errors, touched,
-   loginError, userData, loading
+   errors, touched,
+   loginError, loading
 }) => {
    const _renderMessage = message => (
       <span style={{color: 'tomato'}}> { message }</span>
    );
+
+   const userId = localStorage.getItem('userId');
 
    return (
       <Form>
@@ -27,7 +29,7 @@ const LoginForm = ({
          <div>
             {loginError && _renderMessage(loginError)}
             {loading && <Spinner />}
-            {userData && <Redirect to="/" />}
+            {userId && <Redirect to="/" />}
          </div>
 
          <div>
